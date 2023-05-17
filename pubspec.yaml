@@ -14,6 +14,8 @@ dependencies:
   flutter_quill:
     git:
       url: https://github.com/singerdmx/flutter-quill.git
+      
+  vsc_quill_delta_to_html: ^1.0.3
 
   image_picker: ^0.8.5+3
   photo_view: ^0.14.0
@@ -26,6 +28,7 @@ dependencies:
   path_provider: ^2.0.9
   filesystem_picker: ^3.1.0
   file_picker: ^5.2.2
+  measure_size: ^4.0.0
 
 dev_dependencies:
   flutter_test:
