@@ -116,7 +116,7 @@ class _FlutterQuill2State extends State<FlutterQuill2> {
         autoFocus: false,
         readOnly: widget.readOnly,
         showCursor: !widget.readOnly,
-        placeholder: 'Add content',
+        placeholder: '',
         enableSelectionToolbar: isMobile(),
         expands: false,
         padding: EdgeInsets.zero,
