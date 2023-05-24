@@ -225,11 +225,9 @@ packages:
   flutter_quill:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "5ae6e824fa677d0d6ba5dac9035c803125bb5390"
-      url: "https://github.com/singerdmx/flutter-quill.git"
-    source: git
+      path: "../flutter-quill"
+      relative: true
+    source: path
     version: "7.1.18"
   flutter_test:
     dependency: "direct dev"
@@ -241,6 +239,22 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: "direct main"
+    description:
+      name: font_awesome_flutter
+      sha256: "959ef4add147753f990b4a7c6cccb746d5792dbdc81b1cde99e62e7edb31b206"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.4.0"
+  font_awesome_flutter_named:
+    dependency: "direct main"
+    description:
+      name: font_awesome_flutter_named
+      sha256: ed0a376065c70d0ea538b6e19aa1a602f1ae033c6ac8e5961433f9e8b119fcff
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.2+1"
   gallery_saver:
     dependency: "direct main"
     description:
