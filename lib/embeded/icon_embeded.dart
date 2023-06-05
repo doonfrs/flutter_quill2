@@ -41,9 +41,9 @@ class IconEmbedBuilder extends flutter_quill.EmbedBuilder {
     var color = Colors.black;
     if (iconInfo != null) {
       //convert color from string hex to Color
-      var clr = node.style!.attributes['color']?.value?.toString();
+      final clr = node.style.attributes['color']?.value?.toString();
       if (clr != null) {
-        color = Color(int.parse(clr.replaceAll("#", "FF"), radix: 16));
+        color = Color(int.parse(clr.replaceAll('#', 'FF'), radix: 16));
       }
     }
 

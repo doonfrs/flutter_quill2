@@ -25,12 +25,14 @@ enum _SelectionType {
 
 class FlutterQuill2 extends StatefulWidget {
   const FlutterQuill2({
-    required this.controller,
+    this.controller,
     this.readOnly = false,
     this.toolbarHeight = 50,
+    this.delta,
     Key? key,
   }) : super(key: key);
-  final flutter_quill.QuillController controller;
+  final flutter_quill.QuillController? controller;
+  final List<dynamic>? delta;
   final bool readOnly;
   final double toolbarHeight;
   @override
@@ -52,7 +54,13 @@ class _FlutterQuill2State extends State<FlutterQuill2> {
 
   @override
   void initState() {
-    _controller = widget.controller;
+    _controller = widget.controller ??
+        flutter_quill.QuillController(
+          document: widget.delta != null
+              ? flutter_quill.Document.fromJson(widget.delta!)
+              : flutter_quill.Document(),
+          selection: const TextSelection.collapsed(offset: 0),
+        );
     super.initState();
   }
 
@@ -244,18 +252,5 @@ class _FlutterQuill2State extends State<FlutterQuill2> {
     } else {
       controller.replaceText(index, length, block, null);
     }
-  }
-
-  Future<void> _insertIcon(
-    BuildContext context,
-  ) async {
-    final block = flutter_quill.BlockEmbed.custom(
-      const IconBlockEmbed(''),
-    );
-    final controller = _controller;
-    final index = controller.selection.baseOffset;
-    final length = controller.selection.extentOffset - index;
-
-    controller.replaceText(index, length, block, null);
   }
 }
