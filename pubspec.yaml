@@ -16,19 +16,11 @@ dependencies:
       
   vsc_quill_delta_to_html: ^1.0.3
 
-  image_picker: ^0.8.5+3
-  photo_view: ^0.14.0
-  video_player: ^2.4.2
-  youtube_player_flutter: ^8.1.1
-  gallery_saver: ^2.3.2
-  string_validator: ^1.0.0
-  universal_html: ^2.2.1
-  url_launcher: ^6.1.9
-  path_provider: ^2.0.9
+  path_provider: ^2.1.0
   filesystem_picker: ^3.1.0
   file_picker: ^5.2.2
   measure_size: ^4.0.0
-  font_awesome_flutter: ^10.4.0
+  font_awesome_flutter: ^10.5.0
   font_awesome_flutter_named: ^1.1.2+1
 
 dev_dependencies:

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' as flutter_quill;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NotesBlockEmbed extends flutter_quill.CustomBlockEmbed {
   const NotesBlockEmbed(String value) : super(noteType, value);
@@ -43,7 +44,7 @@ class NotesEmbedBuilder extends flutter_quill.EmbedBuilder {
           maxLines: 3,
           overflow: TextOverflow.ellipsis,
         ),
-        leading: const Icon(Icons.notes),
+        leading: const FaIcon(FontAwesomeIcons.noteSticky),
         onTap: () => addEditNote(context, document: notes),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),

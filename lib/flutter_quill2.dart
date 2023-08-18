@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quill/extensions.dart';
 import 'package:flutter_quill/flutter_quill.dart' as flutter_quill;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:measure_size/measure_size.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -223,7 +224,7 @@ class _FlutterQuill2State extends State<FlutterQuill2> {
             Text('${isEditing ? 'Edit' : 'Add'} note'),
             IconButton(
               onPressed: () => Navigator.of(context).pop(),
-              icon: const Icon(Icons.close),
+              icon: const FaIcon(FontAwesomeIcons.xmark),
             )
           ],
         ),

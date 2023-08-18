@@ -145,7 +145,7 @@ class IconEmbedBuilder extends flutter_quill.EmbedBuilder {
                                           Border.all(color: Colors.grey[300]!),
                                       borderRadius: BorderRadius.circular(8),
                                     ),
-                                    child: Icon(iconData),
+                                    child: FaIcon(iconData),
                                   ));
                             },
                           )),
