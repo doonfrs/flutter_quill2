@@ -96,7 +96,7 @@ class _FlutterQuill2State extends State<FlutterQuill2> {
         extentOffset: offset + length,
       );
 
-      _controller.updateSelection(selection, flutter_quill.ChangeSource.REMOTE);
+      _controller.updateSelection(selection, flutter_quill.ChangeSource.remote);
 
       _selectionType = _SelectionType.none;
 
@@ -116,76 +116,82 @@ class _FlutterQuill2State extends State<FlutterQuill2> {
 
   Widget _buildEditor(BuildContext context) {
     final quillEditor = MouseRegion(
-      cursor: SystemMouseCursors.text,
-      child: flutter_quill.QuillEditor(
-        controller: _controller,
-        scrollController: ScrollController(),
-        scrollable: true,
-        focusNode: _focusNode,
-        autoFocus: false,
-        readOnly: widget.readOnly,
-        showCursor: !widget.readOnly,
-        placeholder: '',
-        enableSelectionToolbar: isMobile(),
-        expands: false,
-        padding: EdgeInsets.zero,
-        onImagePaste: _onImagePaste,
-        onTapUp: (details, p1) {
-          return _onTripleClickSelection();
-        },
-        customStyles: flutter_quill.DefaultStyles(
-          h1: flutter_quill.DefaultTextBlockStyle(
-              const TextStyle(
-                fontSize: 32,
-                color: Colors.black,
-                height: 1.15,
-                fontWeight: FontWeight.w300,
-              ),
-              const flutter_quill.VerticalSpacing(16, 0),
-              const flutter_quill.VerticalSpacing(0, 0),
-              null),
-          sizeSmall: const TextStyle(fontSize: 9),
-        ),
-        embedBuilders: [
-          IconEmbedBuilder(),
-          NotesEmbedBuilder(addEditNote: _addEditNote),
+        cursor: SystemMouseCursors.text,
+        child: flutter_quill.QuillEditor(
+          focusNode: _focusNode,
+          scrollController: ScrollController(),
+          configurations: flutter_quill.QuillEditorConfigurations(
+            readOnly: widget.readOnly,
+            showCursor: !widget.readOnly,
+            placeholder: '',
+            enableSelectionToolbar: isMobile(supportWeb: true),
+            onImagePaste: _onImagePaste,
+            onTapUp: (details, p1) {
+              return _onTripleClickSelection();
+            },
+            customStyles: const flutter_quill.DefaultStyles(
+              h1: flutter_quill.DefaultTextBlockStyle(
+                  TextStyle(
+                    fontSize: 32,
+                    color: Colors.black,
+                    height: 1.15,
+                    fontWeight: FontWeight.w300,
+                  ),
+                  flutter_quill.VerticalSpacing(16, 0),
+                  flutter_quill.VerticalSpacing(0, 0),
+                  null),
+              sizeSmall: TextStyle(fontSize: 9),
+            ),
+            embedBuilders: [
+              IconEmbedBuilder(),
+              NotesEmbedBuilder(addEditNote: _addEditNote),
+            ],
+          ),
+        ));
+
+    final toolbar = flutter_quill.QuillToolbar(
+      configurations: flutter_quill.QuillToolbarConfigurations(
+        showDirection: true,
+        customButtons: [
+          flutter_quill.QuillToolbarCustomButtonOptions(
+              controller: _controller,
+              icon: const Icon(Icons.note_add),
+              afterButtonPressed: () {
+                _addEditNote(context);
+                _focusNode.requestFocus();
+              }),
+          flutter_quill.QuillToolbarCustomButtonOptions(
+              icon: const Icon(Icons.icecream_outlined),
+              afterButtonPressed: () {
+                IconEmbedBuilder.addIcon(context, _controller);
+                _focusNode.requestFocus();
+              }),
         ],
+        showAlignmentButtons: true,
       ),
     );
 
-    final toolbar = flutter_quill.QuillToolbar.basic(
-      showDirection: true,
-      controller: _controller,
-      customButtons: [
-        flutter_quill.QuillCustomButton(
-            icon: Icons.note_add,
-            onTap: () {
-              _addEditNote(context);
-            }),
-        flutter_quill.QuillCustomButton(
-            icon: Icons.icecream_outlined,
-            onTap: () {
-              IconEmbedBuilder.addIcon(context, _controller);
-            }),
-      ],
-      showAlignmentButtons: true,
-      afterButtonPressed: _focusNode.requestFocus,
-    );
-
-    return Stack(children: [
-      Padding(
-          padding: EdgeInsets.only(top: _toolbarHeight ?? 0),
-          child: quillEditor),
-      if (!widget.readOnly)
-        MeasureSize(
-          child: toolbar,
-          onChange: (size) {
-            setState(() {
-              _toolbarHeight = size.height;
-            });
-          },
+    return flutter_quill.QuillProvider(
+        configurations: flutter_quill.QuillConfigurations(
+          controller: _controller,
+          sharedConfigurations: const flutter_quill.QuillSharedConfigurations(
+            locale: Locale('de'),
+          ),
         ),
-    ]);
+        child: Stack(children: [
+          Padding(
+              padding: EdgeInsets.only(top: _toolbarHeight ?? 0),
+              child: quillEditor),
+          if (!widget.readOnly)
+            MeasureSize(
+              child: toolbar,
+              onChange: (size) {
+                setState(() {
+                  _toolbarHeight = size.height;
+                });
+              },
+            ),
+        ]));
   }
 
   Future<String?> openFileSystemPickerForDesktop(BuildContext context) async {
@@ -228,10 +234,15 @@ class _FlutterQuill2State extends State<FlutterQuill2> {
             )
           ],
         ),
-        content: flutter_quill.QuillEditor.basic(
-          controller: quillEditorController,
-          readOnly: false,
-        ),
+        content: flutter_quill.QuillProvider(
+            configurations: flutter_quill.QuillConfigurations(
+              controller: quillEditorController,
+              sharedConfigurations:
+                  const flutter_quill.QuillSharedConfigurations(
+                locale: Locale('de'),
+              ),
+            ),
+            child: flutter_quill.QuillEditor.basic()),
       ),
     );
 
