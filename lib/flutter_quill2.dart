@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:filesystem_picker/filesystem_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quill/extensions.dart';
@@ -30,17 +29,17 @@ class FlutterQuill2 extends StatefulWidget {
     this.readOnly = false,
     this.toolbarHeight = 50,
     this.delta,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   final flutter_quill.QuillController? controller;
   final List<dynamic>? delta;
   final bool readOnly;
   final double toolbarHeight;
   @override
-  _FlutterQuill2State createState() => _FlutterQuill2State();
+  FlutterQuill2State createState() => FlutterQuill2State();
 }
 
-class _FlutterQuill2State extends State<FlutterQuill2> {
+class FlutterQuill2State extends State<FlutterQuill2> {
   late final flutter_quill.QuillController _controller;
   final FocusNode _focusNode = FocusNode();
   Timer? _selectAllTimer;

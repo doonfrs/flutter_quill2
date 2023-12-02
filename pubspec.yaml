@@ -16,20 +16,20 @@ dependencies:
       
   vsc_quill_delta_to_html: ^1.0.3
 
-  path_provider: ^2.1.0
-  filesystem_picker: ^3.1.0
-  file_picker: ^5.2.2
+  path_provider: ^2.1.1
+  filesystem_picker: ^4.0.0
+  file_picker: ^6.1.1
   measure_size: ^4.0.0
-  font_awesome_flutter: ^10.5.0
+  font_awesome_flutter: ^10.6.0
   font_awesome_flutter_named: ^1.1.2+1
+  path: ^1.8.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  pedantic: ^1.11.1
+  flutter_lints: ^3.0.1
 
-dependency_overrides:
-  intl: ^0.17.0
+
 
 # The following section is specific to Flutter packages.
 flutter:
